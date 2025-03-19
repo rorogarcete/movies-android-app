@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +26,7 @@ import com.example.kueski_movies.ui.theme.KueskiMoviesTheme
 fun MovieTile(
   imagePath: String,
   title: String,
-  overview: String,
+  releaseDate: String,
   onClick: () -> Unit,
 ) {
   Card(
@@ -44,11 +48,21 @@ fun MovieTile(
           style = MaterialTheme.typography.titleMedium,
           textAlign = TextAlign.Center,
         )
-        Text(
-          text = overview,
-          style = MaterialTheme.typography.bodyMedium,
-          textAlign = TextAlign.Center,
-        )
+        Row(
+          verticalAlignment = Alignment.CenterVertically,
+        ) {
+          IconButton(onClick = {}) {
+            Icon(
+              imageVector = Icons.Filled.FavoriteBorder,
+              contentDescription = null,
+            )
+          }
+          Text(
+            text = releaseDate,
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
+          )
+        }
       }
     }
   }
@@ -61,7 +75,7 @@ fun MovieTilePreview() {
     MovieTile(
       imagePath = "something",
       title = "My Movie Title",
-      overview = "This movie is all about showing the Ui that will result from this composition with a large description",
+      releaseDate = "12-12-21",
       onClick = {}
     )
   }

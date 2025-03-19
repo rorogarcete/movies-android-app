@@ -1,32 +1,28 @@
 package com.example.kueski_movies.presentation.screen.explore_movies.viewmodel
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kueski_movies.data.movies.remote.api.MoviesApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.kueski_movies.data.movies.paging.MoviesPagingSource
 import com.example.kueski_movies.data.movies.remote.model.MovieResponse
-import com.example.kueski_movies.presentation.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
 @HiltViewModel
 class ExploreMoviesViewModel @Inject constructor(
-  private val api: MoviesApi,
+  private val moviesPagingSource: MoviesPagingSource,
 ) : ViewModel() {
-  private val _state = mutableStateOf<UiState<List<MovieResponse>>>(UiState.Loading)
-  val state: State<UiState<List<MovieResponse>>> = _state
 
-  fun getRecentMovies() {
-    viewModelScope.launch {
-      try {
-        val result = api.getMovies(page = 1)
-        _state.value = UiState.Success(result.results)
-      } catch (e: Exception) {
-        _state.value = UiState.Failure(e)
-      }
-    }
+  fun getRecentMovies() : Flow<PagingData<MovieResponse>>{
+    return Pager(
+      PagingConfig(pageSize = 20),
+    ) {
+      moviesPagingSource
+    }.flow.cachedIn(viewModelScope)
   }
 }

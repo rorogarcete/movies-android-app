@@ -1,6 +1,5 @@
 package com.example.kueski_movies.presentation.screen.movie_details.component
 
-import android.graphics.Paint.Align
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -108,12 +108,22 @@ fun MovieDetails(
       imagePath = movieDetails.posterPath ?: "",
       modifier = Modifier.fillMaxWidth(),
     )
-    Text(
-      text = movieDetails.title,
-      style = MaterialTheme.typography.headlineSmall,
-      textAlign = TextAlign.Center,
-      modifier = Modifier.align(Alignment.CenterHorizontally)
-    )
+    Row(
+      modifier = Modifier.align(Alignment.CenterHorizontally),
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      IconButton(onClick = {}) {
+        Icon(
+          imageVector = Icons.Filled.FavoriteBorder,
+          contentDescription = null,
+        )
+      }
+      Text(
+        text = movieDetails.title,
+        style = MaterialTheme.typography.headlineSmall,
+        textAlign = TextAlign.Center,
+      )
+    }
     Row(
       modifier = Modifier.align(Alignment.CenterHorizontally),
       verticalAlignment = Alignment.CenterVertically,
