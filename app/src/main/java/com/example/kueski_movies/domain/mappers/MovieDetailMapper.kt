@@ -1,8 +1,6 @@
 package com.example.kueski_movies.domain.mappers
 
 import com.example.kueski_movies.data.remote.model.MovieDetailsResponse
-import com.example.kueski_movies.data.remote.model.MovieResponse
-import com.example.kueski_movies.domain.models.Movie
 import com.example.kueski_movies.domain.models.MovieDetail
 import com.example.kueski_movies.util.Mapper
 import javax.inject.Inject
