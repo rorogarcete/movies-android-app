@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.kueski_movies.data.movies.remote.model.MovieResponse
+import com.example.kueski_movies.data.remote.model.MovieResponse
 import com.example.kueski_movies.presentation.model.UiState
 import com.example.kueski_movies.presentation.shared.component.movie.MovieTile
 import com.example.kueski_movies.ui.theme.KueskiMoviesTheme

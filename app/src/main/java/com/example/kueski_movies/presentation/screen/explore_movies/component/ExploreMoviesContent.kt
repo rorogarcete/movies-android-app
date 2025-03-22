@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.example.kueski_movies.data.movies.remote.model.MovieResponse
+import com.example.kueski_movies.data.remote.model.MovieResponse
 import com.example.kueski_movies.presentation.shared.component.movie.MovieTile
 
 @OptIn(ExperimentalMaterial3Api::class)

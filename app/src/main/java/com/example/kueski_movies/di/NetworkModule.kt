@@ -1,7 +1,7 @@
 package com.example.kueski_movies.di
 
 import com.example.kueski_movies.BuildConfig
-import com.example.kueski_movies.data.movies.remote.api.MoviesApi
+import com.example.kueski_movies.data.remote.api.MoviesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.example.kueski_movies
+package com.example.kueski_movies.presentation.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,9 +14,9 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContent {
-      KueskiMoviesTheme {
-        NavigationConfig()
-      }
+        KueskiMoviesTheme {
+            NavigationConfig()
+        }
     }
   }
 }

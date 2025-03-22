@@ -1,7 +1,7 @@
 package com.example.kueski_movies.di
 
 import android.content.Context
-import com.example.kueski_movies.data.movies.local.db.AppDatabase
+import com.example.kueski_movies.data.local.db.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
