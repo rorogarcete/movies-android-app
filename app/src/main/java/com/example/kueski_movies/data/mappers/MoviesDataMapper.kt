@@ -5,7 +5,7 @@ import com.example.kueski_movies.data.remote.model.MovieResponse
 import com.example.kueski_movies.util.Mapper
 import javax.inject.Inject
 
-class MoviesMapper @Inject constructor() : Mapper<Pair<MovieResponse, Int>, MovieEntity> {
+class MoviesDataMapper @Inject constructor() : Mapper<Pair<MovieResponse, Int>, MovieEntity> {
 
     override fun map(input: Pair<MovieResponse, Int>): MovieEntity = MovieEntity(
         id = input.first.id,

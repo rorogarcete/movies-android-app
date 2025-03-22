@@ -1,27 +1,34 @@
-package com.example.kueski_movies.data.paging
+package com.example.kueski_movies.domain.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.kueski_movies.data.remote.model.MovieResponse
 import com.example.kueski_movies.data.repositories.MovieRepository
+import com.example.kueski_movies.domain.mappers.MovieMapper
+import com.example.kueski_movies.domain.models.Movie
 import javax.inject.Inject
 
 class MoviesPagingSource @Inject constructor(
   private val movieRepository: MovieRepository,
-) : PagingSource<Int, MovieResponse>() {
+  private val movieMapper: MovieMapper
+) : PagingSource<Int, Movie>() {
 
-  override fun getRefreshKey(state: PagingState<Int, MovieResponse>): Int? {
+  override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
     return state.anchorPosition?.let { anchorPosition ->
       val anchorPage = state.closestPageToPosition(anchorPosition)
       anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
     }
   }
 
-  override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieResponse> {
+  override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
     try {
       val nextPageNumber = params.key ?: 1
       val response = movieRepository.getMovies(page = nextPageNumber)
-      return LoadResult.Page(response.results, null, response.page + 1)
+
+      val movies = response.results.map { movie ->
+        movieMapper.map(movie)
+      }
+
+      return LoadResult.Page(movies, null, response.page + 1)
     } catch (e: Exception) {
       return LoadResult.Error(e)
     }
