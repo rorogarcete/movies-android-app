@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kueski_movies.data.movies.remote.model.MovieDetailsResponse
+import com.example.kueski_movies.data.remote.model.MovieDetailsResponse
 import com.example.kueski_movies.data.repositories.MovieRepository
 import com.example.kueski_movies.presentation.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel

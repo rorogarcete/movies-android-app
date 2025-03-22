@@ -31,9 +31,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kueski_movies.R
-import com.example.kueski_movies.data.movies.remote.model.MovieDetailsResponse
-import com.example.kueski_movies.data.movies.remote.model.ProductionCompanyResponse
-import com.example.kueski_movies.data.movies.remote.model.ProductionCountryResponse
+import com.example.kueski_movies.data.remote.model.MovieDetailsResponse
+import com.example.kueski_movies.data.remote.model.ProductionCompanyResponse
+import com.example.kueski_movies.data.remote.model.ProductionCountryResponse
 import com.example.kueski_movies.presentation.model.UiState
 import com.example.kueski_movies.presentation.shared.component.AsyncImage
 import com.example.kueski_movies.ui.theme.KueskiMoviesTheme

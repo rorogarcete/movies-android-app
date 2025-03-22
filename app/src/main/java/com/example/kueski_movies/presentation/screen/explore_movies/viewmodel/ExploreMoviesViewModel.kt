@@ -6,8 +6,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.kueski_movies.data.movies.paging.MoviesPagingSource
-import com.example.kueski_movies.data.movies.remote.model.MovieResponse
+import com.example.kueski_movies.data.paging.MoviesPagingSource
+import com.example.kueski_movies.data.remote.model.MovieResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
