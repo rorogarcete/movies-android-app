@@ -1,11 +1,10 @@
-package  com.example.kueski_movies.data.movies.local.dao
+package  com.example.kueski_movies.data.local.dao
 
-import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.kueski_movies.data.movies.local.entity.MovieEntity
+import com.example.kueski_movies.data.local.entity.MovieEntity
 
 @Dao
 interface MoviesDao {
@@ -14,7 +13,7 @@ interface MoviesDao {
   suspend fun insertAll(movies: List<MovieEntity>)
 
   @Query("SELECT * FROM movies ORDER BY page")
-  fun getMovies(): PagingSource<Int, MovieEntity>
+  fun getMovies(): List<MovieEntity>
 
   @Query("DELETE FROM movies")
   suspend fun deleteAll()

@@ -1,4 +1,4 @@
-package com.example.kueski_movies.data.movies.local.converter
+package com.example.kueski_movies.data.local.converter
 
 import androidx.room.TypeConverter
 

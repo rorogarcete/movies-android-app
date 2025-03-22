@@ -1,13 +1,13 @@
-package com.example.kueski_movies.data.movies.local.db
+package com.example.kueski_movies.data.local.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.kueski_movies.data.movies.local.converter.DbConverter
-import com.example.kueski_movies.data.movies.local.dao.MoviesDao
-import com.example.kueski_movies.data.movies.local.entity.MovieEntity
+import com.example.kueski_movies.data.local.converter.DbConverter
+import com.example.kueski_movies.data.local.dao.MoviesDao
+import com.example.kueski_movies.data.local.entity.MovieEntity
 
 @Database(entities = [MovieEntity::class], version = 1, exportSchema = false)
 @TypeConverters(DbConverter::class)
