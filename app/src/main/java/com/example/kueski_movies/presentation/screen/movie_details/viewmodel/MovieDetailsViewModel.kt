@@ -4,8 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kueski_movies.data.remote.model.MovieDetailsResponse
 import com.example.kueski_movies.data.repositories.MovieRepository
+import com.example.kueski_movies.domain.mappers.MovieDetailMapper
+import com.example.kueski_movies.domain.models.MovieDetail
 import com.example.kueski_movies.presentation.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,16 +14,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailsViewModel @Inject constructor(
-  private val repository: MovieRepository
+  private val repository: MovieRepository,
+  private val movieDetailMapper: MovieDetailMapper,
 ) : ViewModel() {
-  private val _state = mutableStateOf<UiState<MovieDetailsResponse?>>(UiState.Loading)
-  val state: State<UiState<MovieDetailsResponse?>> = _state
+  private val _state = mutableStateOf<UiState<MovieDetail?>>(UiState.Loading)
+  val state: State<UiState<MovieDetail?>> = _state
 
   fun getMovie(id: Int) {
     viewModelScope.launch {
       try {
         val result = repository.getMovie(id.toString())
-        _state.value = UiState.Success(result)
+
+        val movieDetail = movieDetailMapper.map(result)
+
+        _state.value = UiState.Success(movieDetail)
       } catch (e: Exception) {
         _state.value = UiState.Failure(e)
       }

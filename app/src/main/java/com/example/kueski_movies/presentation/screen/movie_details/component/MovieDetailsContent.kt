@@ -31,9 +31,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kueski_movies.R
-import com.example.kueski_movies.data.remote.model.MovieDetailsResponse
-import com.example.kueski_movies.data.remote.model.ProductionCompanyResponse
-import com.example.kueski_movies.data.remote.model.ProductionCountryResponse
+import com.example.kueski_movies.domain.models.MovieDetail
+import com.example.kueski_movies.domain.models.ProductionCompany
+import com.example.kueski_movies.domain.models.ProductionCountry
 import com.example.kueski_movies.presentation.model.UiState
 import com.example.kueski_movies.presentation.shared.component.AsyncImage
 import com.example.kueski_movies.ui.theme.KueskiMoviesTheme
@@ -41,7 +41,7 @@ import com.example.kueski_movies.ui.theme.KueskiMoviesTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieDetailsContent(
-  uiState: UiState<MovieDetailsResponse?>,
+  uiState: UiState<MovieDetail?>,
   onGoBack: () -> Unit,
 ) {
   Scaffold(
@@ -64,7 +64,7 @@ fun MovieDetailsContent(
         uiState.data?.let {
           MovieDetails(
             modifier = Modifier.padding(paddingValues),
-            movieDetails = it
+            movieDetail = it
           )
         } ?: NotFoundMovie(modifier = Modifier.padding(paddingValues))
       }
@@ -80,15 +80,15 @@ fun MovieDetailsContent(
 
 @Composable
 fun MovieDetails(
-  movieDetails: MovieDetailsResponse,
+  movieDetail: MovieDetail,
   modifier: Modifier = Modifier,
 ) {
   var producers by remember { mutableStateOf("") }
-  if (producers.isEmpty() && movieDetails.productionCompanies.isNotEmpty()) {
+  if (producers.isEmpty() && movieDetail.productionCompanies.isNotEmpty()) {
     val productionBuffer = StringBuffer()
     productionBuffer.apply {
       appendLine("ProducedBy: ")
-      for (company in movieDetails.productionCompanies) {
+      for (company in movieDetail.productionCompanies) {
         appendLine("- ${company.name}")
       }
     }
@@ -105,7 +105,7 @@ fun MovieDetails(
     verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
     AsyncImage(
-      imagePath = movieDetails.posterPath ?: "",
+      imagePath = movieDetail.posterPath ?: "",
       modifier = Modifier.fillMaxWidth(),
     )
     Row(
@@ -119,7 +119,7 @@ fun MovieDetails(
         )
       }
       Text(
-        text = movieDetails.title,
+        text = movieDetail.title,
         style = MaterialTheme.typography.headlineSmall,
         textAlign = TextAlign.Center,
       )
@@ -134,17 +134,17 @@ fun MovieDetails(
         contentDescription = null,
       )
       Text(
-        text = movieDetails.voteAverage.toString(),
+        text = movieDetail.voteAverage.toString(),
         style = MaterialTheme.typography.headlineSmall,
         textAlign = TextAlign.Center,
       )
     }
     Text(
-      text = movieDetails.overview,
+      text = movieDetail.overview,
       style = MaterialTheme.typography.bodyLarge,
     )
     Text(
-      text = "Release date: ${movieDetails.releaseDate}",
+      text = "Release date: ${movieDetail.releaseDate}",
       style = MaterialTheme.typography.bodyLarge,
       textAlign = TextAlign.Center,
     )
@@ -166,7 +166,7 @@ fun NotFoundMovie(
 @Preview
 @Composable
 fun MovieDetailsContentPreview() {
-  val movieDetails = MovieDetailsResponse(
+  val movieDetails = MovieDetail(
     id = -1,
     title = "My movie Title",
     overview = "My movie overview with a text that should be large enough in order to take multiple lines and help us to look if it looks good",
@@ -174,7 +174,7 @@ fun MovieDetailsContentPreview() {
     releaseDate = "10-20-2024",
     posterPath = "somePath",
     productionCompanies = listOf(
-      ProductionCompanyResponse(
+      ProductionCompany(
         id = -1,
         logoPath = "",
         name = "My Production",
@@ -182,7 +182,7 @@ fun MovieDetailsContentPreview() {
       ),
     ),
     productionCountries = listOf(
-      ProductionCountryResponse(
+      ProductionCountry(
         iso31661 = "iso",
         name = "My Country",
       ),

@@ -6,8 +6,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.kueski_movies.data.paging.MoviesPagingSource
-import com.example.kueski_movies.data.remote.model.MovieResponse
+import com.example.kueski_movies.domain.paging.MoviesPagingSource
+import com.example.kueski_movies.domain.models.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -18,7 +18,7 @@ class ExploreMoviesViewModel @Inject constructor(
   private val moviesPagingSource: MoviesPagingSource,
 ) : ViewModel() {
 
-  fun getRecentMovies() : Flow<PagingData<MovieResponse>>{
+  fun getRecentMovies() : Flow<PagingData<Movie>>{
     return Pager(
       PagingConfig(pageSize = 20),
     ) {
