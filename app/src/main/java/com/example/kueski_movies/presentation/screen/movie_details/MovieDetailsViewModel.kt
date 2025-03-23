@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kueski.logger_api.Logger
 import com.example.kueski_movies.data.repositories.MovieRepository
 import com.example.kueski_movies.domain.mappers.MovieDetailMapper
 import com.example.kueski_movies.domain.models.MovieDetail
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class MovieDetailsViewModel @Inject constructor(
     private val repository: MovieRepository,
     private val movieDetailMapper: MovieDetailMapper,
+    private val logger: Logger
 ) : ViewModel() {
   private val _state = mutableStateOf<UiState<MovieDetail?>>(UiState.Loading)
   val state: State<UiState<MovieDetail?>> = _state
@@ -29,6 +31,11 @@ class MovieDetailsViewModel @Inject constructor(
 
         _state.value = UiState.Success(movieDetail)
       } catch (e: Exception) {
+        logger.e(
+          tag = MovieDetailsViewModel::class.java.simpleName,
+          msg = e.message,
+          throwable = e.cause
+        )
         _state.value = UiState.Failure(e)
       }
     }

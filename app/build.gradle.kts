@@ -31,8 +31,9 @@ android {
       buildConfigField(
         "String",
         "MOVIE_API_KEY",
-        "\"9dec2896ea5a537f06d8b42597c9a48d\""
+        "\"2805b177bde136e05a6502ec65f855f0\""
       )
+      buildConfigField("boolean", "APP_LOGS_FLAG", "true")
     }
     named("debug") {
       isMinifyEnabled = false
@@ -41,8 +42,9 @@ android {
       buildConfigField(
         "String",
         "MOVIE_API_KEY",
-        "\"9dec2896ea5a537f06d8b42597c9a48d\""
+        "\"2805b177bde136e05a6502ec65f855f0\""
       )
+      buildConfigField("boolean", "APP_LOGS_FLAG", "false")
     }
   }
 
@@ -120,6 +122,10 @@ dependencies {
   implementation("androidx.paging:paging-compose:${PAGING_COMPOSE}")
   implementation("io.coil-kt:coil-compose:${COIL_COMPOSE}")
   debugImplementation("androidx.compose.ui:ui-tooling:${TOOLING_COMPOSE}")
+
+  // Internals libs
+  implementation(project(":logger-api"))
+  implementation(project(":logger-impl"))
 
   // Testing
   testImplementation("junit:junit:${JUNIT}")
