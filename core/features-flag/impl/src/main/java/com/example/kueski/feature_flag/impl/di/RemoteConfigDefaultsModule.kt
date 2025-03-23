@@ -1,4 +1,4 @@
-package com.example.kueski_movies.di
+package com.example.kueski.feature_flag.impl.di
 
 import com.example.kueski.feature_flag.api.RemoteConfigDefaults
 import dagger.Module
@@ -10,21 +10,21 @@ import dagger.multibindings.StringKey
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RemoteConfigModule {
+object RemoteConfigDefaultsModule {
 
     @IntoMap
     @Provides
     @RemoteConfigDefaults
     @StringKey(ENABLE_FIREBASE)
-    fun enableFirebaseDefault() =  true
+    fun enableFirebaseDefault() = true
 
     @IntoMap
     @Provides
     @RemoteConfigDefaults
-    @StringKey(ENABLE_FAVOURITE_FEATURE)
-    fun enableFacebookDefault() = true
+    @StringKey(ENABLE_FAVORITE_FEATURE)
+    fun enableFavoriteFeature() = true
 
     // Feature flags
-    private const val ENABLE_FAVOURITE_FEATURE = "enable_favourite_feature"
+    private const val ENABLE_FAVORITE_FEATURE = "enable_favorite_feature"
     private const val ENABLE_FIREBASE = "enable_firebase_analytics"
 }

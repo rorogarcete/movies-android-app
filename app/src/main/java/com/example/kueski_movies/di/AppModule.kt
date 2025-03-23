@@ -1,28 +1,18 @@
 package com.example.kueski_movies.di
 
-import RemoteConfigManagerImpl
-import com.example.kueski.feature_flag.api.RemoteConfigManager
-import com.example.kueski.logger_api.Logger
-import com.example.kueski.logger_impl.LogUtil
-import com.example.kueski.logger_impl.LoggerImpl
-import dagger.Binds
+import com.example.kueski.feature_flag.impl.di.RemoteConfigDefaultsModule
+import com.example.kueski.feature_flag.impl.di.RemoteConfigModule
+import com.example.kueski.logger_impl.di.LoggerModule
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
-@Module
+@Module(
+    includes = [
+        LoggerModule::class,
+        RemoteConfigModule::class,
+        RemoteConfigDefaultsModule::class
+    ]
+)
 @InstallIn(SingletonComponent::class)
-interface AppModule {
-
-    companion object {
-        @Provides
-        fun provideLogUti() = LogUtil
-    }
-
-    @Binds
-    fun bindsLogger(logger: LoggerImpl): Logger
-
-    @Binds
-    fun bindsRemoteConfigManager(remoteConfigManager: RemoteConfigManagerImpl): RemoteConfigManager
-}
+interface AppModule
