@@ -65,63 +65,35 @@ android {
 }
 
 dependencies {
-  val ACTIVITY_COMPOSE = "1.9.0"
-  val ANDROID_CORE = "1.13.1"
-  val APP_COMPAT = "1.7.0"
-  val ARCH_CORE = "2.2.0"
-  val COIL_COMPOSE = "2.7.0"
-  val COMPOSE_TEST_MANIFEST = "1.7.8"
-  val COROUTINES_TEST = "1.8.1"
-  val DAGGER_HILT = "2.51.1"
-  val DAGGER_HILT_NAV_COMPOSE = "1.2.0"
-  val ESPRESSO = "3.5.1"
-  val JUNIT = "4.13.2"
-  val JUNIT_COMPOSE = "1.7.8"
-  val LIFECYCLE = "2.8.1"
-  val LOTTIE = "6.4.1"
-  val MATERIAL_COMPOSE = "1.0.0"
-  val MOCKITO = "5.12.0"
-  val MOCKITO_INLINE = "5.2.0"
-  val OKHTTP = "4.12.0"
-  val PAGING_COMPOSE = "3.3.0"
-  val RETROFIT = "2.11.0"
-  val ROOM = "2.6.1"
-  val TIMBER = "5.0.1"
-  val TOOLING_COMPOSE = "1.6.7"
-
-  implementation("androidx.core:core-ktx:${ANDROID_CORE}")
-  implementation("androidx.appcompat:appcompat:${APP_COMPAT}")
-
-  // Timber Logs
-  implementation("com.jakewharton.timber:timber:${TIMBER}")
+  implementation(libs.androidx.core.core.ktx)
+  implementation(libs.appcompat)
 
   // Retrofit
-  implementation("com.squareup.retrofit2:retrofit:${RETROFIT}")
-  implementation("com.squareup.retrofit2:converter-gson:${RETROFIT}")
-  implementation("com.squareup.okhttp3:logging-interceptor:${OKHTTP}")
+  implementation(libs.retrofit2.retrofit)
+  implementation(libs.converter.gson)
+  implementation(libs.logging.interceptor)
 
   // Dagger Hilt
-  implementation("com.google.dagger:hilt-android:${DAGGER_HILT}")
-  kapt("com.google.dagger:hilt-android-compiler:${DAGGER_HILT}")
-  implementation("androidx.hilt:hilt-navigation-compose:${DAGGER_HILT_NAV_COMPOSE}")
+  implementation(libs.hilt.android)
+  kapt(libs.hilt.android.compiler)
+  implementation(libs.androidx.hilt.navigation.compose)
 
   // Lottie
-  implementation("com.airbnb.android:lottie-compose:${LOTTIE}")
+  implementation(libs.lottie.compose)
 
   // Room
-  implementation("androidx.room:room-ktx:${ROOM}")
-  implementation("androidx.room:room-paging:${ROOM}")
-  implementation("androidx.room:room-runtime:${ROOM}")
-  kapt("androidx.room:room-compiler:${ROOM}")
+  implementation(libs.room.ktx)
+  implementation(libs.room.paging)
+  implementation(libs.room.runtime)
+  kapt(libs.room.compiler)
 
   // Compose
-  implementation("androidx.activity:activity-compose:${ACTIVITY_COMPOSE}")
-  implementation("androidx.compose.material3:material3:${MATERIAL_COMPOSE}")
-  implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${LIFECYCLE}")
-  implementation("androidx.compose.material3:material3:${MATERIAL_COMPOSE}")
-  implementation("androidx.paging:paging-compose:${PAGING_COMPOSE}")
-  implementation("io.coil-kt:coil-compose:${COIL_COMPOSE}")
-  debugImplementation("androidx.compose.ui:ui-tooling:${TOOLING_COMPOSE}")
+  implementation(libs.activity.compose)
+  implementation(libs.material3)
+  implementation(libs.androidx.lifecycle.viewmodel.compose)
+  implementation(libs.androidx.paging.compose)
+  implementation(libs.coil.compose)
+  debugImplementation(libs.ui.tooling)
 
   // Internals libs
   implementation(project(":logger-api"))
@@ -130,15 +102,19 @@ dependencies {
   implementation(project(":feature-flag-api"))
   implementation(project(":feature-flag-impl"))
 
+  // Timber Logs
+  implementation(libs.timber)
+
   // Testing
-  testImplementation("junit:junit:${JUNIT}")
-  testImplementation("org.mockito:mockito-inline:${MOCKITO_INLINE}")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${COROUTINES_TEST}")
-  androidTestImplementation("androidx.test.espresso:espresso-core:${ESPRESSO}")
-  androidTestImplementation("org.mockito:mockito-android:${MOCKITO}")
-  androidTestImplementation("androidx.compose.ui:ui-test-junit4-android:${JUNIT_COMPOSE}")
-  debugImplementation("androidx.compose.ui:ui-test-manifest:${COMPOSE_TEST_MANIFEST}")
-  api("org.mockito:mockito-core:${MOCKITO}")
-  api("androidx.arch.core:core-testing:${ARCH_CORE}")
-  api("com.squareup.okhttp3:mockwebserver:${OKHTTP}")
+  testImplementation(libs.junit.junit)
+  testImplementation(libs.mockito.inline)
+  testImplementation(libs.mockito.core)
+  testImplementation(libs.kotlinx.coroutines.test)
+  testImplementation(libs.androidx.core.testing)
+  testImplementation(libs.mockwebserver)
+
+  androidTestImplementation(libs.espresso.core)
+  androidTestImplementation(libs.mockito.android)
+  androidTestImplementation(libs.androidx.ui.test.junit4.android)
+  debugImplementation(libs.ui.test.manifest)
 }

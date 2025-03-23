@@ -15,4 +15,4 @@ import dagger.hilt.components.SingletonComponent
     ]
 )
 @InstallIn(SingletonComponent::class)
-interface AppModule
+interface CoreModule
