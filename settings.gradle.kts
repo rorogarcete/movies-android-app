@@ -6,5 +6,5 @@ pluginManagement {
 }
 rootProject.name = "movies-android-app"
 include(":app")
-include(":logger-api")
-include(":logger-impl")
+
+apply { from("$rootDir/core/core-settings.gradle") }

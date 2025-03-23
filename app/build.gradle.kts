@@ -127,6 +127,9 @@ dependencies {
   implementation(project(":logger-api"))
   implementation(project(":logger-impl"))
 
+  implementation(project(":feature-flag-api"))
+  implementation(project(":feature-flag-impl"))
+
   // Testing
   testImplementation("junit:junit:${JUNIT}")
   testImplementation("org.mockito:mockito-inline:${MOCKITO_INLINE}")

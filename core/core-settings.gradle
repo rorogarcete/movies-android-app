@@ -1,0 +1,14 @@
+def rootDir = settingsDir
+def modulePrefix = ':'
+
+include modulePrefix + 'feature-flag-api'
+project(modulePrefix + 'feature-flag-api').projectDir = new File(rootDir, 'core/features-flag/api')
+
+include modulePrefix + 'feature-flag-impl'
+project(modulePrefix + 'feature-flag-impl').projectDir = new File(rootDir, 'core/features-flag/impl')
+
+include modulePrefix + 'logger-api'
+project(modulePrefix + 'logger-api').projectDir = new File(rootDir, 'core/loggers/api')
+
+include modulePrefix + 'logger-impl'
+project(modulePrefix + 'logger-impl').projectDir = new File(rootDir, 'core/loggers/impl')

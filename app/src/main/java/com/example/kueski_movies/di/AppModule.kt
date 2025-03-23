@@ -1,5 +1,7 @@
 package com.example.kueski_movies.di
 
+import RemoteConfigManagerImpl
+import com.example.kueski.feature_flag.api.RemoteConfigManager
 import com.example.kueski.logger_api.Logger
 import com.example.kueski.logger_impl.LogUtil
 import com.example.kueski.logger_impl.LoggerImpl
@@ -20,4 +22,7 @@ interface AppModule {
 
     @Binds
     fun bindsLogger(logger: LoggerImpl): Logger
+
+    @Binds
+    fun bindsRemoteConfigManager(remoteConfigManager: RemoteConfigManagerImpl): RemoteConfigManager
 }
