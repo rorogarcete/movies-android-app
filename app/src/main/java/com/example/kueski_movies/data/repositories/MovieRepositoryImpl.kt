@@ -1,6 +1,7 @@
 package com.example.kueski_movies.data.repositories
 
 import androidx.room.withTransaction
+import com.example.kueski.network.api.APIService
 import com.example.kueski_movies.data.local.dao.MoviesDao
 import com.example.kueski_movies.data.local.db.AppDatabase
 import com.example.kueski_movies.data.mappers.MoviesDataMapper
@@ -9,7 +10,7 @@ import com.example.kueski_movies.data.remote.model.MoviesResponse
 import javax.inject.Inject
 
 class MovieRepositoryImpl  @Inject constructor(
-    private val moviesApi: MoviesApi,
+    @APIService private val moviesApi: MoviesApi,
     private val moviesDao: MoviesDao,
     private val mapper: MoviesDataMapper,
     private val appDb: AppDatabase
