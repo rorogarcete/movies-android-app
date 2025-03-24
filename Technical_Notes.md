@@ -81,3 +81,8 @@
 - Docs
   - Added technical notes
   - Updated tech notes
+  - Added project updated
+
+## Project Updated
+Download the project and add ACCESS_TOKEN key with your token in local.properties file
+Ex.: ACCESS_TOKEN=your_access_token
