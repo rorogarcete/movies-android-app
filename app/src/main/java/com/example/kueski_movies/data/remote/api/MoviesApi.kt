@@ -1,6 +1,5 @@
 package com.example.kueski_movies.data.remote.api
 
-import com.example.kueski_movies.BuildConfig
 import com.example.kueski_movies.data.remote.model.MovieDetailsResponse
 import com.example.kueski_movies.data.remote.model.MoviesResponse
 import retrofit2.http.GET
@@ -16,12 +15,10 @@ interface MoviesApi {
     @Query("language") language: String = "en-US",
     @Query("page") page: Int?,
     @Query("sort_by") sortBy: String = "popularity.desc",
-    @Query("api_key") apiKey: String = BuildConfig.MOVIE_API_KEY,
   ): MoviesResponse
 
   @GET("3/movie/{movie_id}")
   suspend fun getMovie(
     @Path("movie_id") id: String,
-    @Query("api_key") apiKey: String = BuildConfig.MOVIE_API_KEY,
   ): MovieDetailsResponse
 }

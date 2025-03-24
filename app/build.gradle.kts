@@ -19,7 +19,7 @@ android {
     versionName = "1.0.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/\"")
+//    buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/\"")
     buildConfigField("String", "IMG_URL", "\"https://image.tmdb.org/t/p/original\"")
   }
 
@@ -28,22 +28,12 @@ android {
       isMinifyEnabled = false
       isDebuggable = false
       proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-      buildConfigField(
-        "String",
-        "MOVIE_API_KEY",
-        "\"2805b177bde136e05a6502ec65f855f0\""
-      )
       buildConfigField("boolean", "APP_LOGS_FLAG", "true")
     }
     named("debug") {
       isMinifyEnabled = false
       isDebuggable = true
       proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-      buildConfigField(
-        "String",
-        "MOVIE_API_KEY",
-        "\"2805b177bde136e05a6502ec65f855f0\""
-      )
       buildConfigField("boolean", "APP_LOGS_FLAG", "false")
     }
   }
@@ -69,7 +59,7 @@ dependencies {
   implementation(libs.appcompat)
 
   // Retrofit
-  implementation(libs.retrofit2.retrofit)
+  implementation(libs.retrofit)
   implementation(libs.converter.gson)
   implementation(libs.logging.interceptor)
 
@@ -101,6 +91,9 @@ dependencies {
 
   implementation(project(":feature-flag-api"))
   implementation(project(":feature-flag-impl"))
+
+  implementation(project(":network-api"))
+  implementation(project(":network-impl"))
 
   // Timber Logs
   implementation(libs.timber)

@@ -12,3 +12,9 @@ project(modulePrefix + 'logger-api').projectDir = new File(rootDir, 'core/logger
 
 include modulePrefix + 'logger-impl'
 project(modulePrefix + 'logger-impl').projectDir = new File(rootDir, 'core/loggers/impl')
+
+include modulePrefix + 'network-api'
+project(modulePrefix + 'network-api').projectDir = new File(rootDir, 'core/network/api')
+
+include modulePrefix + 'network-impl'
+project(modulePrefix + 'network-impl').projectDir = new File(rootDir, 'core/network/impl')
