@@ -1,7 +1,7 @@
 package com.example.kueski.network.api.preferences
 
 interface NetworkPreferences {
-    fun baseMicroService(): String
+    fun baseApiService(): String
 
     fun basePath(): String
 

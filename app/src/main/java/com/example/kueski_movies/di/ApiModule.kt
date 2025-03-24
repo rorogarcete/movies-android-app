@@ -16,6 +16,6 @@ class ApiModule {
   @Provides
   @Singleton
   @APIService
-  fun providesMoviesApi(@APIService retrofit: Retrofit) =
+  fun providesMoviesApi(@APIService retrofit: Retrofit): MoviesApi =
     retrofit.create(MoviesApi::class.java)
 }

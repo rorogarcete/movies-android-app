@@ -1,13 +1,13 @@
 package com.example.kueski.network.impl.di
 
+import com.example.kueski.network.api.interceptors.ApiServicesUrlInterceptor
 import com.example.kueski.network.api.interceptors.AuthorizationInterceptor
 import com.example.kueski.network.api.interceptors.ConnectionTimeOutInterceptor
 import com.example.kueski.network.api.interceptors.HttpRetryInterceptor
-import com.example.kueski.network.api.interceptors.MicroServicesUrlInterceptor
+import com.example.kueski.network.impl.interceptors.ApiServicesUrlInterceptorImpl
 import com.example.kueski.network.impl.interceptors.AuthorizationInterceptorImpl
 import com.example.kueski.network.impl.interceptors.ConnectionTimeOutInterceptorImpl
 import com.example.kueski.network.impl.interceptors.HttpRetryInterceptorImpl
-import com.example.kueski.network.impl.interceptors.MicroServicesUrlInterceptorImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -35,6 +35,6 @@ interface InterceptorModule {
 
     @Binds
     fun bindMicroServiceUrlInterceptor(
-        microServicesUrlInterceptorImpl: MicroServicesUrlInterceptorImpl
-    ): MicroServicesUrlInterceptor
+        apiServicesUrlInterceptorImpl: ApiServicesUrlInterceptorImpl
+    ): ApiServicesUrlInterceptor
 }

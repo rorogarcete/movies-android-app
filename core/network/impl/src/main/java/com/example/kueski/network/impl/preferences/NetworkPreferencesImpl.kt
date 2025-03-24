@@ -13,8 +13,8 @@ class NetworkPreferencesImpl @Inject constructor(
         super.init(context, NETWORK_PREFERENCE_FILE)
     }
 
-    override fun baseMicroService(): String {
-        return getOr(MICRO_SERVICES, MICRO_SERVICES_URL)
+    override fun baseApiService(): String {
+        return getOr(API_SERVICES, API_SERVICES_URL)
     }
 
     override fun basePath(): String {
@@ -36,8 +36,8 @@ class NetworkPreferencesImpl @Inject constructor(
     companion object {
         private const val NETWORK_PREFERENCE_FILE = "NetworkSettings"
 
-        private const val MICRO_SERVICES = "microServices"
-        private const val MICRO_SERVICES_URL = "https://api.themoviedb.org/"
+        private const val API_SERVICES = "apiServices"
+        private const val API_SERVICES_URL = "https://api.themoviedb.org/"
 
         private const val BASE_PATH = "basePath"
         private const val BASE_PATH_URL = "https://image.tmdb.org/t/p/original"

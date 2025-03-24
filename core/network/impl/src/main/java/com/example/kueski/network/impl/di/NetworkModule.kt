@@ -1,16 +1,17 @@
 package com.example.kueski.network.impl.di
 
+import com.example.kueski.network.api.APIService
 import com.example.kueski.network.api.AuthorizationInterceptors
 import com.example.kueski.network.api.GeneralInterceptors
-import com.example.kueski.network.api.APIService
+import com.example.kueski.network.api.interceptors.ApiServicesUrlInterceptor
 import com.example.kueski.network.api.interceptors.AuthorizationInterceptor
 import com.example.kueski.network.api.interceptors.ConnectionTimeOutInterceptor
 import com.example.kueski.network.api.interceptors.HttpRetryInterceptor
-import com.example.kueski.network.api.interceptors.MicroServicesUrlInterceptor
 import com.example.kueski.network.api.preferences.NetworkPreferences
 import com.example.kueski.network.impl.factories.ResultCallAdapterFactory
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory
     includes =
         [
             InterceptorModule::class,
-            NetworkAnalyticsModule::class,
+            NetworkErrorAnalyticsModule::class,
             NetworkPreferenceModule::class,
         ]
 )
@@ -43,11 +44,9 @@ class NetworkModule {
     fun provideGeneralInterceptors(
         httpRetryInterceptor: HttpRetryInterceptor,
         connectionTimeOutInterceptor: ConnectionTimeOutInterceptor,
-        microServicesUrlInterceptor: MicroServicesUrlInterceptor
     ) = arrayListOf(
         connectionTimeOutInterceptor,
-        httpRetryInterceptor,
-        microServicesUrlInterceptor
+        httpRetryInterceptor
     )
 
     @Provides
@@ -67,11 +66,11 @@ class NetworkModule {
     @Provides
     @Singleton
     @APIService
-    fun provideMicroServiceOkhttp(
+    fun provideAPIServiceOkhttp(
         httpClientBuilder: OkHttpClient.Builder,
         tokenAuthenticator: Authenticator,
         @AuthorizationInterceptors authInterceptors: ArrayList<Interceptor>,
-        microServicesUrlInterceptor: MicroServicesUrlInterceptor
+        microServicesUrlInterceptor: ApiServicesUrlInterceptor
     ): OkHttpClient {
         httpClientBuilder.authenticator(tokenAuthenticator)
         httpClientBuilder.addInterceptor(microServicesUrlInterceptor)
@@ -83,28 +82,15 @@ class NetworkModule {
     @Provides
     @Singleton
     @APIService
-    fun provideMicroServiceClient(
-        @APIService httpClient: OkHttpClient,
+    fun provideAPIServiceClient(
+        @APIService httpClient: Lazy<OkHttpClient>,
         gson: Gson,
         networkPreferences: NetworkPreferences,
-        resultAdapterFactory: ResultCallAdapterFactory,
-    ) = provideRetrofitBuilder(
-        httpClient,
-        networkPreferences.baseMicroService(),
-        gson,
-        resultAdapterFactory
-    ).build()
-
-    @Provides
-    fun provideRetrofitBuilder(
-        httpClient: OkHttpClient,
-        path: String,
-        gson: Gson,
         resultAdapterFactory: ResultCallAdapterFactory,
     ) = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(resultAdapterFactory)
-        .baseUrl(path)
-        .client(httpClient)
-
+        .baseUrl(networkPreferences.baseApiService())
+        .client(httpClient.get())
+        .build()
 }
