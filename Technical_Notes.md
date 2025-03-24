@@ -35,6 +35,7 @@
 
 ## Key issues identified
 - Direct access to API services from viewModels
+- Use api key in query param 
 - No contain domain layer
 - Used data response in UI layer
 
@@ -42,8 +43,11 @@
 - Added repository pattern for dataSources
 - Implement domain layer
 - Implement mappers for data/domain layers
+- Implement network module
+- Implement logger module 
+- Implement features-flag module
 
 ## Potential future improvements if more time were available
 - Implement structure for features into api/impl modules
-- Separated Network/DS in core modules
+- Separated DS in core modules
 - Created command line utility for generated features/modules
