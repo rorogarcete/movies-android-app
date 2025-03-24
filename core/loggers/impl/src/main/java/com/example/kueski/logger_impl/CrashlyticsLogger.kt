@@ -29,7 +29,7 @@ object CrashlyticsLogger {
         customKeys: List<Pair<String, String>>? = null,
         throwable: Throwable? = null
     ) {
-        if (true) {
+        if (!BuildConfig.DEBUG) {
             if (priority == Log.VERBOSE || priority == Log.DEBUG) {
                 return
             }

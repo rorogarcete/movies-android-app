@@ -13,4 +13,5 @@ object HttpConstants {
     const val APPLICATION_JSON = "application/json"
     const val MAX_RETRIES = 3
     const val BASE_DELAY = 500
+    const val TIMEOUT = 5L
 }
