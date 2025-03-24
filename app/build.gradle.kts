@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
   id("com.android.application")
   id("dagger.hilt.android.plugin")
@@ -20,6 +22,13 @@ android {
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     buildConfigField("String", "IMG_URL", "\"https://image.tmdb.org/t/p/original\"")
+
+    val keystoreFile = project.rootProject.file("local.properties")
+    val properties = Properties()
+    properties.load(keystoreFile.inputStream())
+
+    val accessToken = properties.getProperty("ACCESS_TOKEN") ?: ""
+    buildConfigField("String", "ACCESS_TOKEN", "\"$accessToken\"")
   }
 
   buildTypes {
@@ -28,12 +37,14 @@ android {
       isDebuggable = false
       proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
       buildConfigField("boolean", "APP_LOGS_FLAG", "true")
+      buildConfigField("boolean", "ANALYTICS_FLAG", "true")
     }
     named("debug") {
       isMinifyEnabled = false
       isDebuggable = true
       proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
       buildConfigField("boolean", "APP_LOGS_FLAG", "false")
+      buildConfigField("boolean", "ANALYTICS_FLAG", "false")
     }
   }
 
@@ -96,6 +107,8 @@ dependencies {
 
   // Timber Logs
   implementation(libs.timber)
+
+  implementation(libs.firebase.crashlytics)
 
   // Testing
   testImplementation(libs.junit.junit)
