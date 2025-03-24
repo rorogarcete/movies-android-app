@@ -8,6 +8,9 @@ import com.example.kueski.network.api.interceptors.AuthorizationInterceptor
 import com.example.kueski.network.api.interceptors.ConnectionTimeOutInterceptor
 import com.example.kueski.network.api.interceptors.HttpRetryInterceptor
 import com.example.kueski.network.api.preferences.NetworkPreferences
+import com.example.kueski.network.impl.constants.HttpConstants.AUTHORIZATION
+import com.example.kueski.network.impl.constants.HttpConstants.BEARER
+import com.example.kueski.network.impl.constants.HttpConstants.TIMEOUT
 import com.example.kueski.network.impl.factories.ResultCallAdapterFactory
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -16,6 +19,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import okhttp3.Authenticator
 import okhttp3.Interceptor
@@ -29,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory
             InterceptorModule::class,
             NetworkErrorAnalyticsModule::class,
             NetworkPreferenceModule::class,
+            ClientsModule::class
         ]
 )
 @InstallIn(SingletonComponent::class)
@@ -37,6 +42,25 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideGson() = GsonBuilder().create()
+
+    @Provides
+    fun provideOkHttp() = OkHttpClient.Builder().apply {
+        readTimeout(TIMEOUT, TimeUnit.SECONDS)
+        connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+    }
+
+    @Provides
+    fun provideAuthenticator(
+        networkPreferences: NetworkPreferences
+    ) = Authenticator { _, response ->
+        response.request
+            .newBuilder()
+            .header(
+                AUTHORIZATION,
+                "$BEARER ${networkPreferences.accessToken()}"
+            )
+            .build()
+    }
 
     @Provides
     @Singleton
