@@ -1,6 +1,7 @@
 package com.example.kueski.network.impl.di
 
 import com.example.kueski.network.api.APIService
+import com.example.kueski.network.api.AppLoggingInterceptors
 import com.example.kueski.network.api.AuthorizationInterceptors
 import com.example.kueski.network.api.GeneralInterceptors
 import com.example.kueski.network.api.interceptors.ApiServicesUrlInterceptor
@@ -12,6 +13,7 @@ import com.example.kueski.network.impl.constants.HttpConstants.AUTHORIZATION
 import com.example.kueski.network.impl.constants.HttpConstants.BEARER
 import com.example.kueski.network.impl.constants.HttpConstants.TIMEOUT
 import com.example.kueski.network.impl.factories.ResultCallAdapterFactory
+import com.example.kueski.network_impl.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Lazy
@@ -24,6 +26,7 @@ import javax.inject.Singleton
 import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -44,12 +47,14 @@ class NetworkModule {
     fun provideGson() = GsonBuilder().create()
 
     @Provides
+    @Singleton
     fun provideOkHttp() = OkHttpClient.Builder().apply {
         readTimeout(TIMEOUT, TimeUnit.SECONDS)
         connectTimeout(TIMEOUT, TimeUnit.SECONDS)
     }
 
     @Provides
+    @Singleton
     fun provideAuthenticator(
         networkPreferences: NetworkPreferences
     ) = Authenticator { _, response ->
@@ -64,13 +69,25 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    @AppLoggingInterceptors
+    fun provideAppLoggingInterceptor() =
+        HttpLoggingInterceptor().apply {
+            if (BuildConfig.DEBUG) {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
+        }
+
+    @Provides
+    @Singleton
     @GeneralInterceptors
     fun provideGeneralInterceptors(
         httpRetryInterceptor: HttpRetryInterceptor,
         connectionTimeOutInterceptor: ConnectionTimeOutInterceptor,
+        @AppLoggingInterceptors loggingInterceptor: Interceptor
     ) = arrayListOf(
         connectionTimeOutInterceptor,
-        httpRetryInterceptor
+        httpRetryInterceptor,
+        loggingInterceptor
     )
 
     @Provides

@@ -4,7 +4,6 @@ data class ServerErrorResponse(
     val message: String,
     val code: String = "",
     val severity: String = "",
-    val ordersWithDebt: String = "",
     val url: String = "",
     val ignoreAuth: Boolean = false,
     val serverCode: String = "-1"

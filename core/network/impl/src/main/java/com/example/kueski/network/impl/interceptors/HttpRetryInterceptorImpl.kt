@@ -1,6 +1,5 @@
 package com.example.kueski.network.impl.interceptors
 
-import androidx.annotation.VisibleForTesting
 import com.example.kueski.network.api.interceptors.HttpRetryInterceptor
 import com.example.kueski.network.impl.constants.HttpConstants
 import okhttp3.Interceptor
@@ -86,6 +85,6 @@ class HttpRetryInterceptorImpl @Inject constructor() : HttpRetryInterceptor {
         }
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-    fun isWhiteListService(path: String) = whiteListedServicesRegEx.any { it.matches(path) }
+    private fun isWhiteListService(path: String) =
+        whiteListedServicesRegEx.any { it.matches(path) }
 }

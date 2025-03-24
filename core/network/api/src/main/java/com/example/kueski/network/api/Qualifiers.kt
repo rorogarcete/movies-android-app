@@ -10,3 +10,6 @@ annotation class AuthorizationInterceptors
 
 @Qualifier
 annotation class GeneralInterceptors
+
+@Qualifier
+annotation class AppLoggingInterceptors

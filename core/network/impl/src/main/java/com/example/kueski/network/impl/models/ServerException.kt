@@ -33,9 +33,6 @@ data class ServerException internal constructor(
     val status: ServiceStatus = ServiceStatus.UNDEFINED
 ) : RuntimeException(message, exception)
 
-fun ServerException.isNetworkException() =
-    kind == Kind.NETWORK
-
 /** Identifies the event kind which triggered a [ServerException].  */
 enum class Kind {
     /** An [IOException] occurred while communicating to the server.  */
@@ -145,7 +142,6 @@ fun getReadableError(
     var message = genericError
     var severity = ""
     var code = ""
-    var ordersWithDebt = ""
     var url = ""
 
     try {
@@ -194,7 +190,6 @@ fun getReadableError(
             message,
             code,
             severity,
-            ordersWithDebt,
             url,
             serverCode = serverCode
         )

@@ -22,12 +22,12 @@ class NetworkPreferencesImpl @Inject constructor(
         set(ACCESS_TOKEN, token)
     }
 
-    companion object {
-        private const val NETWORK_PREFERENCE_FILE = "NetworkSettings"
+    private companion object {
+        const val NETWORK_PREFERENCE_FILE = "NetworkSettings"
 
-        private const val API_SERVICES = "apiServices"
-        private const val API_SERVICES_URL = "https://api.themoviedb.org/"
+        const val API_SERVICES = "apiServices"
+        const val API_SERVICES_URL = "https://api.themoviedb.org/"
 
-        private const val ACCESS_TOKEN = "accessToken"
+        const val ACCESS_TOKEN = "accessToken"
     }
 }
