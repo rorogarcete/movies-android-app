@@ -51,3 +51,33 @@
 - Implement structure for features into api/impl modules
 - Separated DS in core modules
 - Created command line utility for generated features/modules
+
+## Changelog
+- Feature
+  - Added loggers module
+  - Added features-flag module
+  - Added network module
+- Refactors
+  - Added repository patterns in data layer
+  - Added clients Module for amplitude and provides OkHttp/Authenticator
+  - Added firebase init fakes
+  - Updated screens packages
+  - Removed movie folder from data layer
+- Fix
+  - Removed unused preferences keys
+  - Removed qualifier MicroService to APIServices
+  - Removed unused code/imports and removed dispatcher IO
+  - Correct import in screens and moved MainActivity
+  - Correct import in viewModels
+- Enhancement
+  - Added models and mappers for domain layer
+  - Added AppLoggingInterceptors qualifier
+  - Added local.properties for get access_token
+  - Updated libs and used versions catalog
+  - Moved DI factories in impl modules
+  - Moved pagingSource in domain layer
+  - Used domain models in ui layer
+  - Use @APIService in repository
+- Docs
+  - Added technical notes
+  - Updated tech notes
