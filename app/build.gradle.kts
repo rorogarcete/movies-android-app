@@ -22,13 +22,6 @@ android {
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     buildConfigField("String", "IMG_URL", "\"https://image.tmdb.org/t/p/original\"")
-
-    val keystoreFile = project.rootProject.file("local.properties")
-    val properties = Properties()
-    properties.load(keystoreFile.inputStream())
-
-    val accessToken = properties.getProperty("ACCESS_TOKEN") ?: ""
-    buildConfigField("String", "ACCESS_TOKEN", "\"$accessToken\"")
   }
 
   buildTypes {

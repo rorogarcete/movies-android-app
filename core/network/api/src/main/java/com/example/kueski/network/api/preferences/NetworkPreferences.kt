@@ -4,6 +4,4 @@ interface NetworkPreferences {
     fun baseApiService(): String
 
     fun accessToken(): String
-
-    fun setAccessToken(token: String)
 }

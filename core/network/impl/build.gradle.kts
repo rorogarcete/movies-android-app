@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -7,6 +9,15 @@ plugins {
 android {
     namespace = "com.example.kueski.network_impl"
     compileSdk = 35
+
+    defaultConfig {
+        val keystoreFile = project.rootProject.file("local.properties")
+        val properties = Properties()
+        properties.load(keystoreFile.inputStream())
+
+        val accessToken = properties.getProperty("ACCESS_TOKEN") ?: ""
+        buildConfigField("String", "ACCESS_TOKEN", "\"$accessToken\"")
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

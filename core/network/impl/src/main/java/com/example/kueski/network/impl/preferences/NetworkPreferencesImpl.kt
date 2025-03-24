@@ -2,6 +2,7 @@ package com.example.kueski.network.impl.preferences
 
 import android.content.Context
 import com.example.kueski.network.api.preferences.NetworkPreferences
+import com.example.kueski.network_impl.BuildConfig
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -15,12 +16,7 @@ class NetworkPreferencesImpl @Inject constructor(
 
     override fun baseApiService() = getOr(API_SERVICES, API_SERVICES_URL)
 
-    override fun accessToken() = getOr(ACCESS_TOKEN, "")
-
-
-    override fun setAccessToken(token: String) {
-        set(ACCESS_TOKEN, token)
-    }
+    override fun accessToken() = getOr(ACCESS_TOKEN, BuildConfig.ACCESS_TOKEN)
 
     private companion object {
         const val NETWORK_PREFERENCE_FILE = "NetworkSettings"
